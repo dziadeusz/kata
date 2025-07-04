@@ -84,20 +84,20 @@ class BinarySearchTreeTest {
 
         // then:
         assertNotNull(root)
-        assertEquals(10, root?.value)
+        assertEquals(10, root.value)
 
         // Left subtree
-        assertNotNull(root?.left)
-        assertEquals(5, root?.left?.value)
-        assertNotNull(root?.left?.left)
-        assertEquals(3, root?.left?.left?.value)
-        assertNull(root?.left?.right)
+        assertNotNull(root.left)
+        assertEquals(5, root.left?.value)
+        assertNotNull(root.left?.left)
+        assertEquals(3, root.left?.left?.value)
+        assertNull(root.left?.right)
 
         // Right subtree
-        assertNotNull(root?.right)
-        assertEquals(15, root?.right?.value)
-        assertNotNull(root?.right?.right)
-        assertEquals(20, root?.right?.right?.value)
-        assertNull(root?.right?.left)
+        assertNotNull(root.right)
+        assertEquals(15, root.right?.value)
+        assertNotNull(root.right?.right)
+        assertEquals(20, root.right?.right?.value)
+        assertNull(root.right?.left)
     }
 }
