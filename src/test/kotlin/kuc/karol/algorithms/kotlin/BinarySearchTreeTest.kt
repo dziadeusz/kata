@@ -5,6 +5,81 @@ import org.junit.jupiter.api.Test
 
 class BinarySearchTreeTest {
 
+    private fun createTestTree(): TreeNode {
+        var root: TreeNode? = null
+        root = TreeNode.insertRecursive(root, 10)
+        root = root.insertRecursive(5)
+        root = root.insertRecursive(15)
+        root = root.insertRecursive(3)
+        root = root.insertRecursive(20)
+        return root
+    }
+
+    @Test
+    fun `findClosestRecursive should return exact match when target value exists in tree`() {
+        // given:
+        val root = createTestTree()
+        val target = Target(10)
+
+        // when:
+        val result = root.findClosestRecursive(root, target)
+
+        // then:
+        assertEquals(10, result)
+    }
+
+    @Test
+    fun `findClosestRecursive should return closest value when target value does not exist in tree`() {
+        // given:
+        val root = createTestTree()
+        val target = Target(11)
+
+        // when:
+        val result = root.findClosestRecursive(root, target)
+
+        // then:
+        assertEquals(10, result)
+    }
+
+    @Test
+    fun `findClosestRecursive should return closest value when target is between two nodes`() {
+        // given:
+        val root = createTestTree()
+        val target = Target(13)
+
+        // when:
+        val result = root.findClosestRecursive(root, target)
+
+        // then:
+        assertEquals(15, result)
+    }
+
+    @Test
+    fun `findClosestRecursive should return closest value when target is less than all nodes`() {
+        // given:
+        val root = createTestTree()
+        val target = Target(1)
+
+        // when:
+        val result = root.findClosestRecursive(root, target)
+
+        // then:
+        assertEquals(3, result)
+    }
+
+    @Test
+    fun `findClosestRecursive should return closest value when target is greater than all nodes`() {
+        // given:
+        val root = createTestTree()
+        val target = Target(25)
+
+        // when:
+        val result = root.findClosestRecursive(root, target)
+
+        // then:
+        assertEquals(20, result)
+    }
+
     @Test
     fun `insertRecursive should create a new node when root is null`() {
         // given:
