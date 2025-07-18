@@ -3,10 +3,11 @@ package kuc.karol.algorithms.kotlin.celebrity
 class Party(private val guests: Set<Guest>) {
     fun celebrityInvitedLinear(): Guest? {
         val candidate = this partyHasACelebrityCandidateAmong guests
-        val isCelebrity = guests.all { guest ->
-            guest == candidate || (!(candidate knows guest) && (guest knows candidate))
-        }
-        return if (isCelebrity) candidate else null
+        return guests
+            .filter { it != candidate }
+            .all { guest -> !(candidate knows guest) && (guest knows candidate) }
+            .takeIf { it }
+            ?.let { candidate }
     }
 
     infix fun partyHasACelebrityCandidateAmong(guests: Set<Guest>): Guest {
