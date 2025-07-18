@@ -1,12 +1,26 @@
 package kuc.karol.algorithms.kotlin.celebrity
 
-class Party(private val guests: Set<Guest>) {
-    val thisParty = this
+private val knowNoOneButAllKnowHim: (Guest, Guest) -> Boolean =
+    { aCelebrity, otherGuest ->
+        aCelebrity doesntKnow otherGuest && otherGuest knows aCelebrity
+    }
+private val thereIsNoCelebrity = null
 
-    fun findCelebrityLinear(): Guest? {
-        return thisParty hasACandidateAmongIts
-                guests whoIsACelebrityOr null;
+class CelebrityLinearFinder(val party: Party) {
+    fun findCelebrityLinear() =
+        party hasACandidateAmongIts party.guests whoMight
+                knowNoOneButAllKnowHim asACelebrityOr thereIsNoCelebrity;
+}
 
+data class Party(val guests: Set<Guest>) {
+
+    fun findCelebrityQuadratic(): Guest? {
+        return guests.find { celebrity ->
+            guests.all { guest ->
+                val isCelebrity = celebrity doesntKnow guest && guest knows celebrity
+                celebrity == guest || isCelebrity
+            }
+        }
     }
 
     infix fun hasACandidateAmongIts(guests: Set<Guest>): CandidateSearchResult {
@@ -16,32 +30,28 @@ class Party(private val guests: Set<Guest>) {
         }
         return CandidateSearchResult(candidate, guests)
     }
-
-    fun findCelebrityQuadratic(): Guest? {
-        return guests.find { candidate ->
-            guests.all { guest ->
-                candidate == guest || candidate doesntKnow guest && guest knows candidate
-            }
-        }
-    }
 }
 
 data class CandidateSearchResult(
     val candidate: Guest,
     val guests: Set<Guest>
 ) {
-    infix fun whoIsACelebrityOr(default: Guest?): Guest? {
+    infix fun whoMight(celebrityRule: (Guest, Guest) -> Boolean): CelebritySearchResult {
         val candidateIsCelebrity = guests
             .filter { it != candidate }
-            .all { guest -> candidate doesntKnow guest && guest knows candidate }
-        return if (candidateIsCelebrity) candidate else default
+            .all { guest -> celebrityRule(candidate, guest) }
+        return CelebritySearchResult(candidateIsCelebrity, candidate)
     }
 }
 
 data class CelebritySearchResult(
     val isSuccessFull: Boolean,
     val candidate: Guest
-)
+) {
+    infix fun asACelebrityOr(default: Guest?): Guest? =
+        if (isSuccessFull) candidate else default
+
+}
 
 data class Guest(val id: Int, val socialNetwork: Array<BooleanArray>) {
 

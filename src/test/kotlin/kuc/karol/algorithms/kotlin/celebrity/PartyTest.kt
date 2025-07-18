@@ -17,9 +17,10 @@ class PartyTest {
 
         val guests = (0 until 3).map { id -> Guest(id, socialNetwork) }.toSet()
         val party = Party(guests)
+        val celebrityFinder = CelebrityLinearFinder(party)
 
         // when:
-        val celebrity = party.findCelebrityLinear()
+        val celebrity = celebrityFinder.findCelebrityLinear()
 
         // then:
         assertEquals(guests.find { it.id == 2 }, celebrity)
@@ -36,9 +37,10 @@ class PartyTest {
 
         val guests = (0 until 3).map { id -> Guest(id, socialNetwork) }.toSet()
         val party = Party(guests)
+        val celebrityFinder = CelebrityLinearFinder(party)
 
         // when:
-        val celebrity = party.findCelebrityLinear()
+        val celebrity = celebrityFinder.findCelebrityLinear()
 
         // then:
         assertNull(celebrity)
@@ -53,9 +55,10 @@ class PartyTest {
 
         val guests = (0 until 1).map { id -> Guest(id, socialNetwork) }.toSet()
         val party = Party(guests)
+        val celebrityFinder = CelebrityLinearFinder(party)
 
         // when:
-        val celebrity = party.findCelebrityLinear()
+        val celebrity = celebrityFinder.findCelebrityLinear()
 
         // then:
         assertEquals(guests.first(), celebrity)
@@ -72,9 +75,10 @@ class PartyTest {
 
         val guests = (0 until 3).map { id -> Guest(id, socialNetwork) }.toSet()
         val party = Party(guests)
+        val celebrityFinder = CelebrityLinearFinder(party)
 
         // when:
-        val celebrity = party.findCelebrityLinear()
+        val celebrity = celebrityFinder.findCelebrityLinear()
 
         // then:
         assertNull(celebrity)
@@ -91,9 +95,10 @@ class PartyTest {
 
         val guests = (0 until 3).map { id -> Guest(id, socialNetwork) }.toSet()
         val party = Party(guests)
+        val celebrityFinder = CelebrityLinearFinder(party)
 
         // when:
-        val celebrity = party.findCelebrityLinear()
+        val celebrity = celebrityFinder.findCelebrityLinear()
 
         // then:
         // In this case, no one is a celebrity because no one is known by everyone else
