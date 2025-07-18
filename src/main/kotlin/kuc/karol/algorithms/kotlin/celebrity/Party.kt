@@ -1,23 +1,47 @@
 package kuc.karol.algorithms.kotlin.celebrity
 
 class Party(private val guests: Set<Guest>) {
-    fun celebrityInvitedLinear(): Guest? {
-        val candidate = this partyHasACelebrityCandidateAmong guests
-        val candidateIsCelebrity = guests
-            .filter { it != candidate }
-            .all { guest -> candidate doesntKnow guest && guest knows candidate }
-        return if(candidateIsCelebrity) candidate else null
+    val thisParty = this
+
+    fun findCelebrityLinear(): Guest? {
+        return thisParty hasACandidateAmongIts
+                guests whoIsACelebrityOr null;
 
     }
 
-    infix fun partyHasACelebrityCandidateAmong(guests: Set<Guest>): Guest {
-        val candidate = guests.first()
+    infix fun hasACandidateAmongIts(guests: Set<Guest>): CandidateSearchResult {
         val others = guests.toList().drop(1)
-        return others.fold(candidate) { currentCandidate, nextGuest ->
+        val candidate = others.fold(guests.first()) { currentCandidate, nextGuest ->
             if (currentCandidate knows nextGuest) nextGuest else currentCandidate
+        }
+        return CandidateSearchResult(candidate, guests)
+    }
+
+    fun findCelebrityQuadratic(): Guest? {
+        return guests.find { candidate ->
+            guests.all { guest ->
+                candidate == guest || candidate doesntKnow guest && guest knows candidate
+            }
         }
     }
 }
+
+data class CandidateSearchResult(
+    val candidate: Guest,
+    val guests: Set<Guest>
+) {
+    infix fun whoIsACelebrityOr(default: Guest?): Guest? {
+        val candidateIsCelebrity = guests
+            .filter { it != candidate }
+            .all { guest -> candidate doesntKnow guest && guest knows candidate }
+        return if (candidateIsCelebrity) candidate else default
+    }
+}
+
+data class CelebritySearchResult(
+    val isSuccessFull: Boolean,
+    val candidate: Guest
+)
 
 data class Guest(val id: Int, val socialNetwork: Array<BooleanArray>) {
 
