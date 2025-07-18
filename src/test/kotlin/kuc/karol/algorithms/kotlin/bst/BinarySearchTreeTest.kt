@@ -1,6 +1,6 @@
-package kuc.karol.algorithms.kotlin
+package kuc.karol.algorithms.kotlin.bst
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class BinarySearchTreeTest {
@@ -22,10 +22,10 @@ class BinarySearchTreeTest {
         val target = Target(10)
 
         // when:
-        val result = root.findClosestRecursive(root, target)
+        val result = root.findClosestIterative(root, target)
 
         // then:
-        assertEquals(10, result)
+        Assertions.assertEquals(10, result)
     }
 
     @Test
@@ -35,10 +35,10 @@ class BinarySearchTreeTest {
         val target = Target(11)
 
         // when:
-        val result = root.findClosestRecursive(root, target)
+        val result = root.findClosestIterative(root, target)
 
         // then:
-        assertEquals(10, result)
+        Assertions.assertEquals(10, result)
     }
 
     @Test
@@ -48,10 +48,10 @@ class BinarySearchTreeTest {
         val target = Target(13)
 
         // when:
-        val result = root.findClosestRecursive(root, target)
+        val result = root.findClosestIterative(root, target)
 
         // then:
-        assertEquals(15, result)
+        Assertions.assertEquals(15, result)
     }
 
     @Test
@@ -61,10 +61,10 @@ class BinarySearchTreeTest {
         val target = Target(1)
 
         // when:
-        val result = root.findClosestRecursive(root, target)
+        val result = root.findClosestIterative(root, target)
 
         // then:
-        assertEquals(3, result)
+        Assertions.assertEquals(3, result)
     }
 
     @Test
@@ -74,10 +74,10 @@ class BinarySearchTreeTest {
         val target = Target(25)
 
         // when:
-        val result = root.findClosestRecursive(root, target)
+        val result = root.findClosestIterative(root, target)
 
         // then:
-        assertEquals(20, result)
+        Assertions.assertEquals(20, result)
     }
 
     @Test
@@ -89,9 +89,9 @@ class BinarySearchTreeTest {
         val result = TreeNode.insertRecursive(null, value)
 
         // then:
-        assertEquals(value, result.value)
-        assertNull(result.left)
-        assertNull(result.right)
+        Assertions.assertEquals(value, result.value)
+        Assertions.assertNull(result.left)
+        Assertions.assertNull(result.right)
     }
 
     @Test
@@ -105,10 +105,10 @@ class BinarySearchTreeTest {
         val result = root.insertRecursive(smallerValue)
 
         // then:
-        assertEquals(rootValue, result.value)
-        assertNotNull(result.left)
-        assertEquals(smallerValue, result.left?.value)
-        assertNull(result.right)
+        Assertions.assertEquals(rootValue, result.value)
+        Assertions.assertNotNull(result.left)
+        Assertions.assertEquals(smallerValue, result.left?.value)
+        Assertions.assertNull(result.right)
     }
 
     @Test
@@ -122,10 +122,10 @@ class BinarySearchTreeTest {
         val result = root.insertRecursive(largerValue)
 
         // then:
-        assertEquals(rootValue, result.value)
-        assertNull(result.left)
-        assertNotNull(result.right)
-        assertEquals(largerValue, result.right?.value)
+        Assertions.assertEquals(rootValue, result.value)
+        Assertions.assertNull(result.left)
+        Assertions.assertNotNull(result.right)
+        Assertions.assertEquals(largerValue, result.right?.value)
     }
 
     @Test
@@ -138,10 +138,10 @@ class BinarySearchTreeTest {
         val result = root.insertRecursive(rootValue)
 
         // then:
-        assertEquals(rootValue, result.value)
-        assertNull(result.left)
-        assertNull(result.right)
-        assertSame(root, result) // Should return the same object for duplicates
+        Assertions.assertEquals(rootValue, result.value)
+        Assertions.assertNull(result.left)
+        Assertions.assertNull(result.right)
+        Assertions.assertSame(root, result) // Should return the same object for duplicates
     }
 
     @Test
@@ -158,21 +158,21 @@ class BinarySearchTreeTest {
         root = root.insertRecursive(20)
 
         // then:
-        assertNotNull(root)
-        assertEquals(10, root.value)
+        Assertions.assertNotNull(root)
+        Assertions.assertEquals(10, root.value)
 
         // Left subtree
-        assertNotNull(root.left)
-        assertEquals(5, root.left?.value)
-        assertNotNull(root.left?.left)
-        assertEquals(3, root.left?.left?.value)
-        assertNull(root.left?.right)
+        Assertions.assertNotNull(root.left)
+        Assertions.assertEquals(5, root.left?.value)
+        Assertions.assertNotNull(root.left?.left)
+        Assertions.assertEquals(3, root.left?.left?.value)
+        Assertions.assertNull(root.left?.right)
 
         // Right subtree
-        assertNotNull(root.right)
-        assertEquals(15, root.right?.value)
-        assertNotNull(root.right?.right)
-        assertEquals(20, root.right?.right?.value)
-        assertNull(root.right?.left)
+        Assertions.assertNotNull(root.right)
+        Assertions.assertEquals(15, root.right?.value)
+        Assertions.assertNotNull(root.right?.right)
+        Assertions.assertEquals(20, root.right?.right?.value)
+        Assertions.assertNull(root.right?.left)
     }
 }

@@ -1,4 +1,4 @@
-package kuc.karol.algorithms.java;
+package kuc.karol.algorithms.java.bst;
 
 public class TreeNode {
     private TreeNode left;

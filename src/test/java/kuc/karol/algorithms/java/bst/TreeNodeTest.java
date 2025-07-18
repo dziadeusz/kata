@@ -1,4 +1,4 @@
-package kuc.karol.algorithms.java;
+package kuc.karol.algorithms.java.bst;
 
 import org.junit.jupiter.api.Test;
 

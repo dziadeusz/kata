@@ -1,4 +1,4 @@
-package kuc.karol.algorithms.java;
+package kuc.karol.algorithms.java.bst;
 
 record Closest(Integer value) {
 

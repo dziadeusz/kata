@@ -1,4 +1,4 @@
-package kuc.karol.algorithms.kotlin
+package kuc.karol.algorithms.kotlin.bst
 
 import kotlin.math.abs
 
@@ -40,7 +40,7 @@ data class TreeNode(
         else -> this
     }
 
-    fun findClosestRecursive(node: TreeNode, target: Target): Int {
+    fun findClosestIterative(node: TreeNode, target: Target): Int {
         var currentNode: TreeNode? = node
         var closest = Closest(node.value)
         while (closest canBeImprovedTowards target within currentNode) {
